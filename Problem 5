@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define loop(i,n) for(int i=0; i<n; i++)
+ 
+int main(){
+ 
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+ 
+    int n;
+    cin>>n;
+    string s;
+    int ans=0;
+    vector<vector<int>> arr(91,vector<int>(13,0));
+
+    loop(i,n){
+        cin>>s;
+        int sum = 0;
+        for(int j=0; j<s.length(); j++){
+            sum += s[j]-'0';
+        }
+        arr[sum][s.length()]++;
+    }
+
+    for(int i=0; i<51; i++){
+        for(int j=0; j<13; j++){
+            ans = ans + (arr[i][j]*arr[50-i][12-j]);
+        }
+    } 
+    cout<<ans<<endl;
+}
