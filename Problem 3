@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define loop(i,n) for(int i=0; i<n; i++)
+ 
+int main(){
+ 
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+ 
+    int n,k;
+    int index;
+    cin>>n>>k;
+    ll sum=0;
+    vector<ll> arr(n);
+    loop(i,n){
+        cin>>arr[i];
+        sum += arr[i];
+    }
+    sort(arr.begin(),arr.end());
+    vector<ll> ans;
+    ans.push_back(sum);
+    loop(i,n-1){
+        ll temp=0;
+        temp = arr.front()-arr.back();
+        if(temp<0) temp = -temp;
+        sum = sum - arr.front() - arr.back() + temp;
+        arr.pop_back();
+        arr.erase(arr.begin(),arr.begin()+1);
+        index = upper_bound(arr.begin(),arr.end(),temp)-arr.begin();
+        arr.insert(arr.begin()+index,temp);
+        ans.push_back(sum);
+    }
+    loop(i,k){
+        int q;
+        cin>>q;
+        cout<<ans[q]<<endl;
+    }
+}
