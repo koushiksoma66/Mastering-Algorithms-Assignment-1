@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define loop(i,n) for(int i=0; i<n; i++)
+ 
+int main(){
+ 
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+
+    int t; 
+    cin>>t; 
+    while(t--){
+        ll n,k;
+        cin>>n>>k;
+        ll arr[n];
+        loop(i,n){
+            cin>>arr[i];
+        }
+        sort(arr,arr+n);
+        ll cost=0;
+        while(cost+arr[n-1]<=k){
+            cost += arr[n-1];
+            arr[n-1]--;
+            for(ll i=n-1; i>0; i--){
+                if(arr[i]<arr[i-1]){
+                    ll temp = arr[i-1];
+                    arr[i-1] = arr[i];
+                    arr[i] = temp;
+                }
+                else break;
+            }
+        }
+        cout<<arr[n-1]<<endl;
+    }
+}
